@@ -6,6 +6,7 @@ import java.util.List;
 public class Node {
     private int val;
     private List<Node> children = new ArrayList<>();
+    private boolean visited = false;
 
     public Node() {
     }
@@ -25,5 +26,13 @@ public class Node {
 
     public List<Node> children() {
         return children;
+    }
+
+    public void changeVisited(boolean state) {
+        this.visited = state;
+    }
+
+    public boolean visited() {
+        return this.visited;
     }
 }
