@@ -17,6 +17,7 @@ public class CreateLevelLinkedListTest {
     }
 
     // 재귀 활용 DFS
+    /*
     void createLevelLinkedList(TreeNode root, ArrayList<LinkedList<TreeNode>> lists, int level) {
         if (root == null) return;
 
@@ -57,5 +58,5 @@ public class CreateLevelLinkedListTest {
         }
 
         return result;
-    }
+    }*/
 }
