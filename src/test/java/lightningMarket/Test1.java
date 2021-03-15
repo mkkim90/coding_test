@@ -12,10 +12,10 @@ import java.util.Map;
 
 public class Test1 {
     /**
-     * Method안의 로직은 아래와 같은 기능을 구현해야 한다. 
+     * Method안의 로직은 아래와 같은 기능을 구현해야 한다.
      * 1. https://s3.ap-northeast-2.amazonaws.com/bunjang-interview/events.json
      * - 해당 URL을 콜하고 리턴되는 데이터를 가져와서 Model 클래스로 적용하고 데이터를 분석해야 한다.
-     * Jayce(문제근)오후 4:05
+     *
      * 해당 포맷으로 만들
      * [
      * {
