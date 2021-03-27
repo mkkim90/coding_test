@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ *
+ * 141 릿코드 Linked List Cycle
  * 142 릿코드 Linked List Cycle
  * <p>
  * walker : 한번에 한칸씩
@@ -68,7 +70,7 @@ public class LinkedListCycleTest {
     }
 
     @Test
-    void solution() {
+    void detectCycleTest() {
         assertThat(detectCycle(root).getVal()).isEqualTo(3);
     }
 
@@ -103,5 +105,29 @@ public class LinkedListCycleTest {
         }
 
         return check;
+    }
+
+    @Test
+    void detectCycleTest() {
+        assertThat(hasCycle(root)).isTrue();
+    }
+
+    private boolean hasCycle(ListNode head) {
+        ListNode walker = head;
+        ListNode runner = head;
+        while (runner != null) {
+            runner = runner.next;
+            if (runner != null) {
+                runner = runner.next;
+                walker = walker.next;
+                if (runner == walker) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+
+        return runner != null;
     }
 }
