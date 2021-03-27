@@ -108,7 +108,7 @@ public class LinkedListCycleTest {
     }
 
     @Test
-    void detectCycleTest() {
+    void hasCyleTest() {
         assertThat(hasCycle(root)).isTrue();
     }
 
