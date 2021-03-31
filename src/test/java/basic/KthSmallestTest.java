@@ -1,7 +1,5 @@
 package basic;
 
-import apple.laf.JRSUIUtils;
-
 public class KthSmallestTest {
     int k;
     int i;
