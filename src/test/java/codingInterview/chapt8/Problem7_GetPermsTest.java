@@ -11,7 +11,7 @@ public class Problem7_GetPermsTest {
 
     @Test
     void solution() {
-
+        ArrayList<Integer> list = new ArrayList<>();
         getPerms("123");
     }
 
