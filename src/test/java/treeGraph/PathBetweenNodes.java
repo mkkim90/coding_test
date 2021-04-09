@@ -1,7 +1,6 @@
 package treeGraph;
 
-import basic.Graph;
-import basic.Node;
+import leetcode.Node;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

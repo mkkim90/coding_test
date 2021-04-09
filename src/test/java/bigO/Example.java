@@ -1,6 +1,6 @@
 package bigO;
 
-import basic.TreeNode;
+import leetcode.TreeNode;
 import org.junit.jupiter.api.Test;
 
 

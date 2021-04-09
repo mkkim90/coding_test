@@ -1,11 +1,6 @@
 package treeGraph;
 
-import basic.TreeNode;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * 깊이의 리스트

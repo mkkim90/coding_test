@@ -1,6 +1,6 @@
 package treeGraph;
 
-import basic.TreeNode;
+import leetcode.TreeNode;
 import org.junit.jupiter.api.Test;
 
 public class ChekBSTTest {

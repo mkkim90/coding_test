@@ -1,6 +1,6 @@
 package codingInterview.chapt2;
 
-import basic.ListNode;
+import leetcode.ListNode;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

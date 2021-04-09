@@ -1,10 +1,9 @@
 package codingInterview.chapt8;
 
-import basic.Point;
+import leetcode.Point;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
