@@ -8,11 +8,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FineSquareTest {
     int count = 0;
+
     @Test
     void solution() {
         assertThat(fineSquareCount3(8, 12)).isEqualTo(80);
     }
-    
+
     private void fineSquareCount(int width, int height, int index) {
         if (width < 1 || height < 1) {
             return;
@@ -26,8 +27,7 @@ public class FineSquareTest {
         for (int i = 0; i < width; i++) {
             answer += height * i / width;
         }
-
-        return answer * 2;
+        return answer * 4;
     }
 
     private int fineSquareCount3(int width, int height) {
