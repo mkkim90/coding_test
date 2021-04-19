@@ -1,53 +1,64 @@
 package programmers;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * "aabbaccc"	7
+ * "ababcdcdababcdcd"	9
+ * "abcabcdede"	8
+ * "abcabcabcabcdededededede"	14
+ * "xababcdcdababcdcd"	17
+ */
 public class StringCompressionTest {
-    @Test
-    void solution() {
 
+    @ParameterizedTest
+    @CsvSource({"aabbaccc,7", "ababcdcdababcdcd,9", "abcabcdede,8", "abcabcabcabcdededededede, 14", "xababcdcdababcdcd, 17"})
+    void solution(String str, int minCount) {
+        assertThat(minOfStringCompressLength(str)).isEqualTo(minCount);
     }
 
     private int minOfStringCompressLength(String s) {
         int answer = Integer.MAX_VALUE;
         if (s.length() == 1) return 1;
-        // 문자열 기준 1~length 까지
+        // i는 간격
         for (int i = 1; i < s.length(); i++) {
-            String now = "";
-            String comp = "";
-            String temp = "";
-            int cnt = 1;
+            String currentSubString = "";
+            String nextSubString = "";
+            StringBuffer compress = new StringBuffer();
+            int cnt = 0;
+            // j와 i를 통해 문자열 잘라서 비교
+            for (int j = 0; j * i <= s.length(); j++) {
+                cnt++;
+                currentSubString = nextSubString;
+                nextSubString = s.substring(i * j, (i * (j + 1) > s.length()) ? s.length() : (i * (j + 1)));
 
-            // j 기준 단위 0부터 length/i 단위까지
-            // 나누어 떨어지지않을때 끝까지 계산해주려면 <=
-            for (int j = 0; j <= s.length() / i; j++) {
-                int from = i * j;
-                int to = i * (j + 1);
-                // 값 넘을 시 보정
-                if (to > s.length()) to = s.length();
-
-                // 기준점 변경
-                now = comp;
-                comp = s.substring(from, to);
-
-                // 비교
-                if (now.equals(comp)) cnt++;
-                else {
-                    if (cnt > 1) temp += String.valueOf(cnt);
-                    temp += now;
-                    cnt = 1; // 개수 초기화
+                if (!currentSubString.equals(nextSubString)) {
+                    if (cnt > 1) compress.append(cnt);
+                    compress.append(currentSubString);
+                    cnt = 0;
                 }
             }
-            // 남은값 처리
-            if (cnt > 1) temp += String.valueOf(cnt);
-            temp += comp;
-            // 갱신
-            answer = Math.min(temp.length(), answer);
+            // 마지막 처리
+            if (cnt > 1) compress.append(cnt);
+            compress.append(nextSubString);
+
+            answer = Math.min(compress.toString().length(), answer);
         }
 
         return answer;
     }
 
+    @DisplayName("재귀 활용한 문자열 압축")
+    @ParameterizedTest
+    @CsvSource({"aabbaccc,7", "ababcdcdababcdcd,9", "abcabcdede,8", "abcabcabcabcdededededede, 14", "xababcdcdababcdcd, 17"})
+    void solution2(String str, int minCount) {
+        assertThat(minStringCompress(str)).isEqualTo(minCount);
+    }
 
     private int minStringCompress(String s) {
         int answer = 0;
