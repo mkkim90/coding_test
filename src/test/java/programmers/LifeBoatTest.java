@@ -3,8 +3,6 @@ package programmers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,9 +23,9 @@ public class LifeBoatTest {
         int answer = 0;
         int i = 0;
         Arrays.sort(people);
-        for(int j=people.length-1; i<=j; j--) {
+        for (int j = people.length - 1; i <= j; j--) {
             answer++;
-            if(people[j] + people[i] <= limit) {
+            if (people[j] + people[i] <= limit) {
                 i++;
             }
         }
