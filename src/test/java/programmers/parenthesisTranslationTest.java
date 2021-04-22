@@ -47,7 +47,7 @@ public class parenthesisTranslationTest {
         sb.append("(");
         sb.append(getCorrectParenthesis(v));
         sb.append(")");
-        for (int i = 1; i < uLen - 1; i++) {
+        for (int i = 1; i < index - 1; i++) {
             if (u.charAt(i) == '(') {
                 sb.append(")");
             } else {
