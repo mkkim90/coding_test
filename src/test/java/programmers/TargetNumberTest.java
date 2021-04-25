@@ -6,10 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TargetNumberTest {
     private int target;
+
     @Test
     void solution() {
-
-        int[] numbers = {1,1,1,1,1};
+        int[] numbers = {1, 1, 1, 1, 1};
         target = 3;
         assertThat(targetNumber(numbers, 0, 0)).isEqualTo(5);
     }
