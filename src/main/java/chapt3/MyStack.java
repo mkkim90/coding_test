@@ -12,7 +12,7 @@ public class MyStack<T> {
     // inner class
     private static class StackNode<T> {
         private T data;
-        private StackNode<T> next;
+        private StackNode next;
         public StackNode(T data) {
             this.data = data;
         }
