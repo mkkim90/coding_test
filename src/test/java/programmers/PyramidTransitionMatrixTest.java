@@ -12,54 +12,54 @@ public class PyramidTransitionMatrixTest {
     void pyramidTransition() {
         assertThat(pyramidTransition("BCD", Arrays.asList("BCG", "CDE", "GEA", "FFF"))).isTrue();
         assertThat(pyramidTransition("AABA", Arrays.asList("AAA", "AAB", "ABA", "ABB", "BAC"))).isFalse();
-
     }
 
-    private Map<String, List<Character>> strToChar = new HashMap<String, List<Character>>();
+    private Map<String, List<Character>> allowedMap = new HashMap<String, List<Character>>();
 
     public boolean pyramidTransition(String bottom, List<String> allowed) {
 
         for (String str : allowed) {
-            strToChar.computeIfAbsent(str.substring(0, 2), i -> new ArrayList<>()).add(str.charAt(2));
+            allowedMap.computeIfAbsent(str.substring(0, 2), i -> new ArrayList<>()).add(str.charAt(2));
         }
         return isPyramidTransition(bottom);
     }
 
-    public boolean isPyramidTransition(String current) {
-        // 루트는 하나
-        if (current.length() == 1)
+    public boolean isPyramidTransition(String bottom) {
+        // 루트 하나일 경우 최상루트이므로 종료
+        if (bottom != null && bottom.length() == 1)
             return true;
 
-        // 부모 리스트 추출 BCD 라면 BC의 루트인 G, CD의 루트인 E
-        List<List<Character>> rootList = getRootLists(current);
-        // 자식의 키에 따른 값이 없으면 false 반환
-        if (rootList == null) return false;
+        // 부모 리스트 추출
+        // BCD일때 BC의 루트인 G와 CD의 루트인 E를 추출합니다.
+        // 루트 값이 없으 false 반환
+        List<List<Character>> roots = getRoots(bottom);
+        if (roots == null) return false;
 
-        List<String> resultList = new ArrayList<String>();
-        // 부모 리스트에서 나올수 있는 조합 추출 G,E라면 GE
-        traverse(resultList, rootList, 0, new StringBuilder(""));
+        // 부모 리스트에서 나올수 있는 조합 추출하여 자식노들리스트 활용 G,E라면 GE
+        List<String> bottoms = new ArrayList<String>();
+        combination(bottoms, roots, 0, new StringBuilder(""));
 
-        for (int i = 0; i < resultList.size(); i++) {
-            if (!isPyramidTransition(resultList.get(i)))
+        // 재귀
+        for (int i = 0; i < bottoms.size(); i++) {
+            if (!isPyramidTransition(bottoms.get(i)))
                 return false;
         }
         return true;
     }
 
-    private List<List<Character>> getRootLists(String current) {
-        List<List<Character>> rootList = new ArrayList<List<Character>>();
-        for (int i = 0; i < current.length() - 1; i++) {
-            String substr = current.substring(i, i + 2);
-            List<Character> currentList = strToChar.getOrDefault(substr, null);
+    private List<List<Character>> getRoots(String chillds) {
+        List<List<Character>> roots = new ArrayList<List<Character>>();
+        for (int i = 0; i < chillds.length() - 1; i++) {
+            List<Character> currentList = allowedMap.getOrDefault(chillds.substring(i, i + 2), null);
             if (currentList == null) {
                 return null;
             }
-            rootList.add(currentList);
+            roots.add(currentList);
         }
-        return rootList;
+        return roots;
     }
 
-    public void traverse(List<String> resultList, List<List<Character>> rootList, int index, StringBuilder sb) {
+    public void combination(List<String> resultList, List<List<Character>> rootList, int index, StringBuilder sb) {
         if (index == rootList.size()) {
             resultList.add(sb.toString());
             return;
@@ -68,8 +68,8 @@ public class PyramidTransitionMatrixTest {
         List<Character> currentRoots = rootList.get(index);
         for (int i = 0; i < currentRoots.size(); i++) {
             sb.append(currentRoots.get(i));
-            traverse(resultList, rootList, index+1,sb);
-            sb.deleteCharAt(sb.length()-1);
+            combination(resultList, rootList, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 }
