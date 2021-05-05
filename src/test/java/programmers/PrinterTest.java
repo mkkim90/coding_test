@@ -3,6 +3,7 @@ package programmers;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,13 +23,15 @@ public class PrinterTest {
     void solution() {
         int[] nums = {1, 1, 9, 1, 1, 1};
         int location = 0;
-        assertThat(printer(nums, location)).isEqualTo(5);
+        assertThat(solution(nums, location)).isEqualTo(5);
     }
+
+
+
 
     private int printer(int[] nums, int location) {
         Queue<Printer> q = new LinkedList<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<>(
-                (a, b) -> b-a);
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
         for (int i = 0; i < nums.length; i++) {
             q.offer(new Printer(nums[i], i));
             pq.offer(nums[i]);
@@ -81,6 +84,33 @@ public class PrinterTest {
         return answer;
     }
 
+    public int printer3(int[] priorities, int location) {
+        // 내림차순
+        List<Integer> prioritiesOrderByDesc = Arrays.stream(priorities)
+                .boxed()
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
+
+        Queue<Printer> q = new LinkedList<>();
+        for (int i = 0; i < priorities.length; i++) {
+            q.offer(new Printer(priorities[i], i));
+        }
+        int answer = 0;
+        int index = 0;
+        while (!q.isEmpty()) {
+            if (q.peek().getPriority() == prioritiesOrderByDesc.get(index)) {
+                answer++;
+                if (q.peek().getLocation() == location) {
+                    return answer;
+                }
+                index++;
+                q.poll();
+            } else {
+                q.offer(q.poll());
+            }
+        }
+        return answer;
+    }
 
 }
 
