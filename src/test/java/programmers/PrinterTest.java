@@ -23,7 +23,7 @@ public class PrinterTest {
     void solution() {
         int[] nums = {1, 1, 9, 1, 1, 1};
         int location = 0;
-        assertThat(solution(nums, location)).isEqualTo(5);
+        assertThat(printer3(nums, location)).isEqualTo(5);
     }
 
 
@@ -95,15 +95,15 @@ public class PrinterTest {
         for (int i = 0; i < priorities.length; i++) {
             q.offer(new Printer(priorities[i], i));
         }
-        int answer = 0;
+        int answer = 1;
         int index = 0;
         while (!q.isEmpty()) {
             if (q.peek().getPriority() == prioritiesOrderByDesc.get(index)) {
-                answer++;
                 if (q.peek().getLocation() == location) {
                     return answer;
                 }
                 index++;
+                answer++;
                 q.poll();
             } else {
                 q.offer(q.poll());
