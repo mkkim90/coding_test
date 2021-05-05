@@ -23,21 +23,19 @@ public class PrinterTest {
     void solution() {
         int[] nums = {1, 1, 9, 1, 1, 1};
         int location = 0;
-        assertThat(printer3(nums, location)).isEqualTo(5);
+        assertThat(printer2(nums, location)).isEqualTo(5);
     }
-
-
 
 
     private int printer(int[] nums, int location) {
         Queue<Printer> q = new LinkedList<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
         for (int i = 0; i < nums.length; i++) {
             q.offer(new Printer(nums[i], i));
             pq.offer(nums[i]);
         }
         int orderNumber = 1;
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             if (q.peek().getPriority() == pq.peek()) {
                 if (q.peek().getLocation() == location) {
                     return orderNumber;
@@ -56,28 +54,28 @@ public class PrinterTest {
     // 모범 답
     int printer2(int[] priorities, int location) {
         int answer = 0;
-        int l = location;
+
 
         Queue<Integer> que = new LinkedList<Integer>();
-        for(int i : priorities){
+        for (int i : priorities) {
             que.add(i);
         }
 
         Arrays.sort(priorities);
-        int size = priorities.length-1;
+        int size = priorities.length - 1;
 
-        while(!que.isEmpty()){
+        while (!que.isEmpty()) {
             Integer i = que.poll();
-            if(i == priorities[size - answer]){
+            if (i == priorities[size - answer]) {
                 answer++;
-                l--;
-                if(l <0)
+                location--;
+                if (location < 0)
                     break;
-            }else{
+            } else {
                 que.add(i);
-                l--;
-                if(l<0)
-                    l=que.size()-1;
+                location--;
+                if (location < 0)
+                    location = que.size() - 1;
             }
         }
 
