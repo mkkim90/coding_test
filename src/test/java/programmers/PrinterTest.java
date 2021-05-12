@@ -109,7 +109,6 @@ public class PrinterTest {
         }
         return answer;
     }
-
 }
 
 class Printer {

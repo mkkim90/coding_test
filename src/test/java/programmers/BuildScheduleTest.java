@@ -14,7 +14,7 @@ public class BuildScheduleTest {
 
     @Test
     void solution() {
-        assertThat(buildSchedule(new int[]{93, 30, 55}, new int[]{1, 30, 5})).containsExactly(2,1);
+        assertThat(buildSchedule(new int[]{93, 30, 55}, new int[]{1, 30, 5})).containsExactly(2, 1);
         assertThat(buildSchedule(new int[]{95, 90, 99, 99, 80, 99}, new int[]{1, 1, 1, 1, 1, 1})).containsExactly(1, 3, 2);
     }
 
@@ -48,6 +48,19 @@ public class BuildScheduleTest {
 
     private int caculateEndDate(int progress, int speed) {
         return ((100 - progress) % speed == 0) ? (100 - progress) / speed : ((100 - progress) / speed) + 1;
+    }
+
+
+    public int[] solution(int[] progresses, int[] speeds) {
+        int[] dayOfend = new int[100];
+        int day = -1;
+        for (int i = 0; i < progresses.length; i++) {
+            while (progresses[i] + (day * speeds[i]) < 100) {
+                day++;
+            }
+            dayOfend[day]++;
+        }
+        return Arrays.stream(dayOfend).filter(i -> i != 0).toArray();
     }
 
 }
