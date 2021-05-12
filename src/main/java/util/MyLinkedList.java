@@ -21,7 +21,7 @@ public class MyLinkedList<E> {
 
     public MyLinkedList() {
     }
-    
+
     public boolean addAll(Collection<? extends E> c) {
         return addAll(size, c);
     }
@@ -109,6 +109,8 @@ public class MyLinkedList<E> {
         }
         return -1;
     }
+
+    public boolean isEmpty() { return size() == 0; }
 
     private void checkPositionIndex(int index) {
         if (!isPositionIndex(index))
