@@ -15,7 +15,6 @@ public class MyLinkedList<E> {
         }
     }
 
-    private int modCount = 0;
     private int size = 0;
     private Node<E> first;
     private Node<E> last;
@@ -67,7 +66,6 @@ public class MyLinkedList<E> {
         }
 
         size += numNew;
-        modCount++;
         return true;
     }
 
@@ -150,7 +148,6 @@ public class MyLinkedList<E> {
         else
             pred.next = newNode;
         size++;
-        modCount++;
     }
 
     private E unlink(Node<E> x) {
@@ -175,7 +172,6 @@ public class MyLinkedList<E> {
 
         x.item = null;
         size--;
-        modCount++;
         return element;
     }
 
@@ -188,7 +184,6 @@ public class MyLinkedList<E> {
         else
             l.next = newNode;
         size++;
-        modCount++;
     }
 
 
