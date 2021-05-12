@@ -21,12 +21,7 @@ public class MyLinkedList<E> {
 
     public MyLinkedList() {
     }
-
-    public MyLinkedList(Collection<? extends E> c) {
-        this();
-        addAll(c);
-    }
-
+    
     public boolean addAll(Collection<? extends E> c) {
         return addAll(size, c);
     }
@@ -138,7 +133,7 @@ public class MyLinkedList<E> {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
 
-    void linkBefore(E e, Node<E> succ) {
+    private void linkBefore(E e, Node<E> succ) {
         assert succ != null;
         final Node<E> pred = succ.prev;
         final Node<E> newNode = new Node<>(pred, e, succ);
