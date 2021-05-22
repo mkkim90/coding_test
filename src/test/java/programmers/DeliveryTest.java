@@ -46,9 +46,9 @@ public class DeliveryTest {
         q.add(new Delivery(start, 0));
 
         while (!q.isEmpty()) {
-            int currentCost = q.peek().cost;
-            int currentStart = q.peek().start;
-            q.poll();
+            Delivery current = q.poll();
+            int currentCost = current.cost;
+            int currentStart = current.start;
             if (currentCost > dist[currentStart]) continue;
             for (int i = 0; i < road.length; i++) {
                 if (road[i][0] == currentStart) {
