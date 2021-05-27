@@ -2,54 +2,41 @@ package backjoon;
 
 import java.util.*;
 
-public class DFSAndBFS {
-    private static Map<Integer, List<Integer>> map = new TreeMap<>();
+/**
+ * 7
+ * 6
+ * 1 2
+ * 2 3
+ * 1 5
+ * 5 2
+ * 5 6
+ * 4 7
+ */
+public class VirusTest {
+    private static int[][] metrixes;
+    private static int count;
     private static boolean[] visited;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         final int nodeNum = sc.nextInt();
         final int edgeNum = sc.nextInt();
-        final int firstNode = sc.nextInt();
-
+        metrixes = new int[nodeNum+1][nodeNum+1];
+        visited = new boolean[nodeNum+1];
         for(int i = 0; i < edgeNum; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-            map.computeIfAbsent(x, s -> new ArrayList<>()).add(y);
-            map.computeIfAbsent(y, s -> new ArrayList<>()).add(x);
+            metrixes[x][y] = metrixes[y][x] = 1;
         }
-
-        for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
-            entry.getValue().sort(null);
-        }
-        visited = new boolean[nodeNum + 1];
-        dfs(firstNode);
-        System.out.println(); //줄바꿈
-        visited = new boolean[nodeNum + 1];
-        bfs(firstNode);
+        dfs(1);
+        System.out.println(count);
     }
 
     static void dfs(int i) {
-        System.out.println(i + " ");
         visited[i] = true;
-        for (int n  : map.get(i)) {
-            if (visited[n] == false) {
-                dfs(n);
-            }
-        }
-    }
-
-    static void bfs(int i) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(i);
-        visited[i] = true;
-        while (!q.isEmpty()) {
-            int current = q.poll();
-            System.out.println(current + " ");
-            for (int n : map.get(current)) {
-                if (visited[n] == false) {
-                    visited[n] = true;
-                    q.offer(n);
-                }
+        for (int j = 0; j < metrixes[i].length; j++) {
+            if (metrixes[i][j] == 1 && visited[j] == false) {
+                count++;
+                dfs(j);
             }
         }
     }
