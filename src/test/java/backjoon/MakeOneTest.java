@@ -14,6 +14,16 @@ public class MakeOneTest {
         System.out.println(oneMake(num));
     }
 
+    // Better
+    private static int oneMake(int N) {
+        for (int i = 2; i <= N; i++) {
+            dp[i] = dp[i-1] + 1;
+            if (i%2 == 0) dp[i] = Math.min(dp[i/2] + 1,dp[i]);
+            if (i%3 == 0) dp[i] = Math.min(dp[i/3] + 1, dp[i]);
+        }
+        return dp[N];
+    }
+    /*
     private static int oneMake(int N) {
         if (dp[N] != null) return dp[N];
 
@@ -34,5 +44,5 @@ public class MakeOneTest {
 
         dp[N] = oneMake(N - 1) + 1;
         return dp[N];
-    }
+    }*/
 }
