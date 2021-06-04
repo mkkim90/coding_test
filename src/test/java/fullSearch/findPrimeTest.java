@@ -13,7 +13,7 @@ public class findPrimeTest {
     int answer = 0;
     @Test
     public void solution() {
-        String str = "17";
+        String str = "123";
         char[] numbers = str.toCharArray();
         boolean[] visited = new boolean[numbers.length];
 
@@ -21,7 +21,7 @@ public class findPrimeTest {
             combination(numbers, visited, 0, numbers.length, i);
         }
 
-        assertThat(answer).isEqualTo(3);
+        //assertThat(answer).isEqualTo(3);
     }
 
     private void combination(char[] arr, boolean[] visited, int start, int n, int r) {
@@ -44,9 +44,11 @@ public class findPrimeTest {
                 comb += arr[i];
             }
         }
+        System.out.println(comb);
+        /*
         if (comb != "" && isPrime(Integer.parseInt(comb))) {
             answer++;
-        }
+        }*/
     }
 
     private boolean isPrime(int num) {
