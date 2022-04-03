@@ -1,34 +1,34 @@
 package inflearn;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class 가위_바위_보 {
-    public String solution(int n, int[] a, int[] b) {
-        String answer = "";
-        for (int i = 0; i < n; i++) {
-            if (a[i] == b[i]) answer += "D";
-            else if (a[i] == 1 && b[i] == 3) answer += "A";
-            else if (a[i] == 2 && b[i] == 1) answer += "A";
-            else if (a[i] == 3 && b[i] == 2) answer += "A";
-            else answer += "B";
+public class 피보나치_수열 {
+    public int[] solution(int n) {
+        int[] answer = new int[n];
+        answer[0] = 1;
+        answer[1] = 1;
+        for (int i = 2; i < n; i++) {
+            answer[i] = answer[i -2] + answer[i - 1];
         }
         return answer;
     }
 
+    /* 배열 안쓰는 케이스 */
+    public void solution2(int n) {
+        int a = 1, b = 1, c;
+        System.out.println(a + " " + b + " ");
+        for (int i = 2; i < n; i++) {
+            c = a + b;
+            System.out.println(c + " ");
+            a = b;
+            b= c;
+        }
+    }
+
     public static void main(String[] args) {
-        가위_바위_보 t = new 가위_바위_보();
+        피보나치_수열 t = new 피보나치_수열();
         Scanner kb = new Scanner(System.in);
         int n = kb.nextInt();
-        int[] a = new int[n];
-        int[] b = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = kb.nextInt();
-        }
-        for (int i = 0; i < n; i++) {
-            b[i] = kb.nextInt();
-        }
-        for (char x : t.solution(n,a,b).toCharArray()) System.out.println(x);
-
+        for (int x : t.solution(n)) System.out.println(x + " ");
     }
 }
