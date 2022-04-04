@@ -13,6 +13,7 @@ public class 등수_구하기 {
             }
             answer[i] = cnt;
         }
+        return answer;
     }
 
     public static void main(String[] args) {
