@@ -35,6 +35,6 @@ public class 멘토링 {
                 arr[i][j] = kb.nextInt();
             }
         }
-        System.out.println(t.solution(n, arr));
+        System.out.println(t.solution(n,m, arr));
     }
 }
